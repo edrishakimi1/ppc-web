@@ -8,8 +8,7 @@
 2. How to run
    - cd guacamole
    - docker-compose up -d
-   - See does http://localhost:8080/guacamole/#/ does it work 
-   - put username and password
+   - Go to http://localhost:8080/guacamole/#/. Enter your username and password to log in.
 
 
 3. open index.html
