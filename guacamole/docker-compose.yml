@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  guacamole:
+    image: guacamole/guacamole
+    container_name: guacamole
+    restart: always
+    depends_on:
+      - guacd
+      - postgres
+    ports:
+      - "8080:8080"
+    environment:
+      GUACD_HOSTNAME: guacd
+      POSTGRESQL_HOSTNAME: postgres
+      POSTGRESQL_DATABASE: guacamole_db
+      POSTGRESQL_USER: guac_user
+      POSTGRESQL_PASSWORD: guac_pass
+    platform: linux/amd64
+
+  guacd:
+    image: guacamole/guacd
+    container_name: guacd
+    restart: always
+    platform: linux/amd64
+
+  postgres:
+    image: postgres
+    container_name: guacamole-db
+    restart: always
+    environment:
+      POSTGRES_DB: guacamole_db
+      POSTGRES_USER: guac_user
+      POSTGRES_PASSWORD: guac_pass
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    platform: linux/arm64
+
+volumes:
+  postgres_data:
